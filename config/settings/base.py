@@ -326,8 +326,16 @@ DISTANCE_BETWEEN_PARAGRAPHS = IN_PARAGRAPH_NEW_LINE_DISTANCE  # I like it this w
 AFTER_HEADING_DISTANCE = 0.6 * inch
 
 # EPUB settings
+EPUB_META_ID = 'id123456'
 EPUB_NAME = 'Essays - Paul Graham.epub'
 EPUB_FILEPATH = os.path.join(str(ROOT_DIR), EPUB_NAME)
-
+EPUB_CSS_STYLE = '''BODY {color: white;
+                        font-family: "Times New Roman", Times, serif;
+                        }'''
+EPUB_META_LANG = 'en'
+EPUB_META_AUTHOR = "Paul Graham"
+EPUB_META_DOCUMENT_SUBJECT = ""
+EPUB_META_DOCUMENT_CREATOR = "Paul Graham"
+EPUB_META_DOCUMENT_TITLE = "Essays - Paul Graham"
 DEBUG=True
 

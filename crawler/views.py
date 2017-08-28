@@ -7,7 +7,15 @@ from config.settings.base import (
                                   EPUB_FILEPATH,
                                   EPUB_NAME,
                                   PDF_FILEPATH,
-                                  PDF_TOC_STYLE)
+                                  PDF_TOC_STYLE,
+                                  EPUB_META_AUTHOR,
+                                  EPUB_META_DOCUMENT_SUBJECT,
+                                  EPUB_META_DOCUMENT_CREATOR,
+                                  EPUB_META_DOCUMENT_TITLE,
+                                  EPUB_META_ID,
+                                  EPUB_META_LANG,
+                                  EPUB_CSS_STYLE,
+                                  )
 
 from .builders import PdfBuilder
 from .services import setup_driver, get_essay_title_and_contents
@@ -32,13 +40,13 @@ def download_essays_view(request):
         # download as epub
 
         # Uncomment the following in prod
-        if not path.exists(EPUB_FILEPATH):
-        # if True:
+        # if not path.exists(EPUB_FILEPATH):
+        if True:
             build_epub(get_essay_title_and_contents(setup_driver()))
 
-        with open('essays.epub', 'rb') as r:
+        with open(EPUB_FILEPATH, 'rb') as r:
             response = HttpResponse(r.read(), content_type='application/epub+zip')
-            response['Content-Disposition'] = 'attachment; filename="{0}"'.format('essays.epub')
+            response['Content-Disposition'] = 'attachment; filename="{0}"'.format(EPUB_NAME)
             return response
     else:
         INVALID_FORM_MESSAGE = '''<h1>You tried to hack my site! I have sent your IP address which is {0} to the police
@@ -60,11 +68,11 @@ def build_epub(essay_titles_bodies):
     book = epub.EpubBook()
 
     # set metadata
-    book.set_identifier('id123456')
-    book.set_title('Paul Graham Essays')
-    book.set_language('en')
+    book.set_identifier(EPUB_META_ID)
+    book.set_title(EPUB_META_DOCUMENT_TITLE)
+    book.set_language(EPUB_META_LANG)
 
-    book.add_author('Paul Graham')
+    book.add_author(EPUB_META_AUTHOR)
 
     book.toc = []
     book.spine = ['nav']
@@ -82,7 +90,7 @@ def build_epub(essay_titles_bodies):
         book.spine.append(chapter)
 
     # define CSS style
-    style = 'BODY {color: white;}'
+    style = EPUB_CSS_STYLE
     nav_css = epub.EpubItem(uid="style_nav", file_name="style/nav.css", media_type="text/css", content=style)
 
     # add CSS file
