@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<form action="{% url 'crawler:download_essays'%}" method="POST">
+    {% csrf_token %}
+    Download as: <br>
+
+    <input type="radio" name="download_type" value="pdf" required> PDF<br>
+    <input type="radio" name="download_type" value="epub">Epub<br>
+    <input type="submit" value="Download"> <br>
+
+</form>
+
+{% endblock %}
