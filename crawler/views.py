@@ -20,8 +20,8 @@ def download_essays_view(request):
 
     if request.POST.get('download_type') == 'pdf':
         # download as pdf
-        # if not path.exists(PDF_FILEPATH):
-        if True:
+        if not path.exists(PDF_FILEPATH):
+        # if True:
             build_pdf(get_essay_title_and_contents(setup_driver()))
 
         with open(PDF_FILEPATH, 'rb') as r:

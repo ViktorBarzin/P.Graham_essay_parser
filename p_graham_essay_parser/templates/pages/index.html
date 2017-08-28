@@ -138,8 +138,29 @@
               <article class="section" data-menuanchor="home">
                 <div class="download">
                   <h1 class="headline animated fadeInDown">Download an always up-to-date epub version of Paul Graham’s essays.</h1>
-                  <div class="animated fadeInDown"><button onclick="__gaTracker('send', 'event', 'Button (EPUB)', 'click', 'Downloads');" type="button" value="Download .EPUB" class="hvr-grow">Download .EPUB</button></div>
-                  <span class="pdf-version animated fadeInDown">or <a onclick="__gaTracker('send', 'event', 'Button (PDF)', 'click', 'Downloads');" href="#">download .PDF version</a></span>
+                  <script>
+                      function download (download_type) {
+                          var form = document.createElement('form');
+                          form.setAttribute('method', 'post');
+                          form.setAttribute('action', "{% url 'crawler:download_essays' %}");
+                          form.style.display = 'hidden';
+
+                          var hiddenField = document.createElement("input");
+                          hiddenField.setAttribute("type", "hidden");
+                          hiddenField.setAttribute("name", "download_type");
+                          hiddenField.setAttribute("value", download_type);
+                          form.appendChild(hiddenField)
+                          document.body.appendChild(form)
+                          form.submit();
+                      }
+                  </script>
+                  <div class="animated fadeInDown"><button onclick="return download('epub');" type="button" value="Download .EPUB" class="hvr-grow">Download .EPUB</button></div>
+                  <span class="pdf-version animated fadeInDown">or
+                      <form id="my_form" method="post" action="{% url 'crawler:download_essays' %}">
+                            <input type="text" name="download_type" value="pdf" style="display:none">
+                          <a href="javascript:{}" onclick="document.getElementById('my_form').submit();">download .PDF version</a>
+                      </form>
+                  </span>
                 </div>
                 <a href="#about"><div class="scroll-down"></div></a>
             </article>
@@ -177,7 +198,7 @@
 
             <!---<div class="copyright">by <img src="https://twitter.com/@dreamture/profile_image?size=mini"> <a href="https://twitter.com/dreamture" alt="Dimitar Raykov">Dimitar Raykov</a></div> -->
 
-            
+
 
           </aside>
         </main>
