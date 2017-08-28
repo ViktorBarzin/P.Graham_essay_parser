@@ -40,8 +40,8 @@ def download_essays_view(request):
         # download as epub
 
         # Uncomment the following in prod
-        # if not path.exists(EPUB_FILEPATH):
-        if True:
+        if not path.exists(EPUB_FILEPATH):
+        # if True:
             build_epub(get_essay_title_and_contents(setup_driver()))
 
         with open(EPUB_FILEPATH, 'rb') as r:
