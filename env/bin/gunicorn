@@ -1,4 +1,4 @@
-#!/code/env/bin/python
+#!/code/p_graham_essay_parser/env/bin/python
 
 # -*- coding: utf-8 -*-
 import re
