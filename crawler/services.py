@@ -9,8 +9,8 @@ def setup_driver():
     # Make sure you have chrome driver in path
     chrome_options = Options()
     # If not in debug, dont open browser ui
-    if not DEBUG:
-        chrome_options.add_argument("--headless")
+    # if not DEBUG:
+    chrome_options.add_argument("--headless")
 
     driver = webdriver.Chrome(executable_path=CHROME_DRIVER_PATH, chrome_options=chrome_options)
     driver.get(MAIN_SITE)
