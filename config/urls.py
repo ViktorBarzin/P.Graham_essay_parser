@@ -7,14 +7,14 @@ from django.views import defaults as default_views
 
 urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name='pages/index.html'), name='home'),
-    url(r'^about/$', TemplateView.as_view(template_name='pages/about.html'), name='about'),
+    #url(r'^about/$', TemplateView.as_view(template_name='pages/about.html'), name='about'),
 
     # Django Admin, use {% url 'admin:index' %}
     url(settings.ADMIN_URL, admin.site.urls),
 
     # User management
-    url(r'^users/', include('p_graham_essay_parser.users.urls', namespace='users')),
-    url(r'^accounts/', include('allauth.urls')),
+    # url(r'^users/', include('p_graham_essay_parser.users.urls', namespace='users')),
+    # url(r'^accounts/', include('allauth.urls')),
 
     url(r'download_essays', include('crawler.urls', namespace='crawler'))
 
